@@ -1,0 +1,31 @@
+ step1:
+      import Vue from 'vue'
+      import { Picker } from 'vant'
+      import 'vant/lib/picker/style'
+      Vue.use(Picker)
+
+ step2: 调用该组件的组件需要注意
+        import ScrollPicker组件
+       <scroll-picker 
+	v-show="selectShow"    //要选择的元素的点击事件控制改组件的显示隐藏
+	:needDatas="needData" //需要选择的数据 和按钮信息
+	@currpick="handlePick" //改方法接你选择的值
+	@pickIsShow="handleIsShow"//该方法接显示隐藏
+      >
+       </scroll-picker>
+	
+     methods : {
+
+   	//这两个方法必须要  都是控制显示隐藏
+       	toPicker (self) {
+          	       this.selectShow=true
+       	 },
+      	  handleIsShow (val) {
+            	      this.selectShow=val
+       	  }
+
+	handlePick (val) {
+		//val是你选择的值
+	}
+    }
+	
