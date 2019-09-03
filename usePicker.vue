@@ -15,6 +15,7 @@ export default{
         return {
             needData:{
                 columns : ["哈哈","嘿嘿","嘻嘻","呀呀","喔喔","嗯嗯","哇哇"],
+                changeBtnSeat :true,   //是否交换确定取消的位置   默认是  ：左取消  右确定
                 leftCancel : {
                     type:"cancel",
                     text:"取消",
