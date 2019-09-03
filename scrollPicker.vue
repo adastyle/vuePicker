@@ -3,8 +3,8 @@
         <div class="shadow" ref="pickerShow"  @click="closePicker"> 
             <div class="content" @click.stop="">
                 <div class="controlBtns">
-                    <span class="cancel" :style="btnCancelStyle" v-show="cancelIsShow" @click="closePicker">{{this.userInputCancelTxt}}</span>
-                    <span class="ensure" :style="btnEnsureStyle" ref="ensurePick" @click="ensurePicker">{{this.userInputEnsureTxt}}</span>
+                    <span :class="{'btnChange' : !this.changeBtnSeat}" :style="btnCancelStyle" v-show="cancelIsShow" @click="closePicker">{{this.userInputCancelTxt}}</span>
+                    <span :class="{'btnChange' : this.changeBtnSeat}" :style="btnEnsureStyle" ref="ensurePick" @click="ensurePicker">{{this.userInputEnsureTxt}}</span>
                 </div>
                 <div class="pickerBox">
                     <div class="picker">
@@ -27,6 +27,7 @@ export default{
             columns :this.PickerPorps.columns,
             leftCancel:this.PickerPorps.leftCancel,
             rightEnsure:this.PickerPorps.rightEnsure,
+            changeBtnSeat :this.PickerPorps.changeBtnSeat,
             userInputCancelTxt : "取消",
             userInputEnsureTxt : "确定",
             btnEnsureStyle:{},
@@ -100,7 +101,7 @@ export default{
                 padding:0 .2rem
                 color:blue
                 text-align:left
-                .ensure 
+                .btnChange 
                     float:right
             .pickerBox
                 text-align:center
