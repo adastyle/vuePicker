@@ -4,7 +4,7 @@
             <span>表情 ：</span>
             <div class="select" ref="currPicker" @click="toPicker">请选择</div>
         </div>
-        <scroll-picker v-show="selectShow" :needDatas="needData" @currpick="handlePick" @pickIsShow="handleIsShow"></scroll-picker>
+        <scroll-picker v-show="selectShow" :PickerPorps="needData" @currpick="handlePick" @pickIsShow="handleIsShow"></scroll-picker>
     </div>
 </template>
 <script>
@@ -20,6 +20,9 @@ export default{
                     text:"取消",
                     style:{
                         color:"red"
+                    },
+                    cancelAfterClick :function () {
+                        console.log('点击取消之后要干嘛')
                     }
                 },
                 rightEnsure : {
@@ -28,6 +31,9 @@ export default{
                     style:{
                         color:"red",
                         fontWeight:"blod"
+                    },
+                    ensureAfterClick : function() {
+                        console.log('点击确定之后要干嘛')
                     }
                 }
             },

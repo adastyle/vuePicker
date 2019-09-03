@@ -19,14 +19,14 @@
 export default{
     name : "ScrollPicker",
     props:{
-        needDatas:Object
+        PickerPorps:Object
     },
     data () {
         return {
             cancelIsShow :false,
-            columns :this.needDatas.columns,
-            leftCancel:this.needDatas.leftCancel,
-            rightEnsure:this.needDatas.rightEnsure,
+            columns :this.PickerPorps.columns,
+            leftCancel:this.PickerPorps.leftCancel,
+            rightEnsure:this.PickerPorps.rightEnsure,
             userInputCancelTxt : "取消",
             userInputEnsureTxt : "确定",
             btnEnsureStyle:{},
@@ -43,26 +43,31 @@ export default{
                 this.userInputCancelTxt = this.leftCancel.text
         }
         //确定按钮必先显示与是否修改的信息
-        if(this.rightEnsure && this.rightEnsure.style)
-            this.btnEnsureStyle=this.rightEnsure.style
-        if(this.rightEnsure && this.rightEnsure.text)
-            this.userInputEnsureTxt=this.rightEnsure.text
+        if(this.rightEnsure){
+            if(this.rightEnsure.text) this.userInputEnsureTxt = this.rightEnsure.text
+            if(this.rightEnsure.style) this.btnEnsureStyle=this.rightEnsure.style
+        }
     },
 
     methods : {
+        //滑动选择 获取相应选中项的内容
         onChange (picker, value, index) {
              localStorage.setItem("ensurePick",value)
         },
         closePicker (){
-            this.toUse()
+            if(typeof this.leftCancel.cancelAfterClick === 'function')  this.leftCancel.cancelAfterClick()
+            this.toClosePicker() 
         },
+        //确定的点击事件
         ensurePicker(){
            let tempPick=localStorage.getItem("ensurePick")
-            this.toUse()
+           this.toClosePicker()
            this.$emit("currpick",tempPick)
+           //如果方法存在则运行  
+            if(typeof this.rightEnsure.ensureAfterClick === 'function') this.rightEnsure.ensureAfterClick()
         },
         //向需要调用组件的上传显示隐藏
-        toUse () {
+        toClosePicker () {
             this.$emit('pickIsShow',false)
         }
     }
